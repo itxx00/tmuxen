@@ -1,7 +1,7 @@
 #!/bin/bash
 # get cpu percent and uptime info
 
-get_cpustat() {
+cpustat() {
     local i=0
     local j
     local d
@@ -22,9 +22,15 @@ get_cpustat() {
     echo $stat
 }
 
-cpuPercent=$(get_cpustat)
+memstat() {
+    total=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
+    free=$(awk '/MemFree/ {print $2}' /proc/meminfo)
+    awk "BEGIN {printf \"%.2f\"\"%\", 100*($total-$free)/$total}"
+}
+
+cpuPercent=$(cpustat)
+memPercent=$(memstat)
 uptime=$(uptime|awk '{print $1" "$2"_"$3"_"$4}')
 loadAvg=$(awk '{print $1","$2","$3}' /proc/loadavg)
-
-echo "$uptime cpu:$cpuPercent, loadAvg:$loadAvg"
+echo "$uptime cpu:$cpuPercent, mem:$memPercent loadAvg:$loadAvg"
 
