@@ -8,16 +8,16 @@
 #
 
 bin=$HOME/bin
-cwd=$(pwd)
+cwd=$(cd $(dirname $0) && pwd)
 
-if [ ! -d $bin ]; then
-    mkdir $bin
-fi
+[ -d $bin ] || mkdir $bin
 
 echo "Installing tmuxen to $bin"
 ln -sf $cwd/tmuxen $bin/tmuxen
+ln -sf $cwd/sysinfo $bin/sysinfo
 
 echo "Symlinking _tmux.conf to $HOME/.tmux.conf"
+[ -f $HOME/.tmux.conf ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bk-$(date '+%Y%m%d%H%M%S')
 ln -sf $cwd/_tmux.conf $HOME/.tmux.conf
 
-exit 0
+exit

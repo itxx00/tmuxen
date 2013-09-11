@@ -1,0 +1,30 @@
+#!/bin/bash
+# get cpu percent and uptime info
+
+get_cpustat() {
+    local i=0
+    local j
+    local d
+    for j in $(grep -w cpu /proc/stat); do
+        d[$i]=$j
+        i=$[$i+1]
+    done
+    # current idle and total cpu time
+    cidle=${d[4]}
+    ctotal=$(awk "BEGIN {print ${d[1]}+${d[2]}+${d[3]}+${d[4]}+${d[5]}+${d[6]}+${d[7]}+${d[8]}}")
+    [ -f /tmp/cputime ] && read pidle ptotal < /tmp/cputime
+    echo "$cidle $ctotal" > /tmp/cputime
+    if [ -n "$pidle" ]; then
+        stat=$(awk "BEGIN {printf \"%.2f\"\"%\", (100-(100*(($cidle-$pidle)/($ctotal-$ptotal)))) }")
+    else
+        stat=0
+    fi
+    echo $stat
+}
+
+cpuPercent=$(get_cpustat)
+uptime=$(uptime|awk '{print $1" "$2"_"$3"_"$4}')
+loadAvg=$(awk '{print $1","$2","$3}' /proc/loadavg)
+
+echo "$uptime cpu:$cpuPercent, loadAvg:$loadAvg"
+
