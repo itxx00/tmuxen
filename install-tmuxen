@@ -19,5 +19,6 @@ ln -sf $cwd/sysinfo $bin/sysinfo
 echo "Symlinking _tmux.conf to $HOME/.tmux.conf"
 [ -f $HOME/.tmux.conf ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bk-$(date '+%Y%m%d%H%M%S')
 ln -sf $cwd/_tmux.conf $HOME/.tmux.conf
+[ -f $HOME/.vimrc ] || ln -s $cwd/vimrc $HOME/.vimrc
 
 exit
