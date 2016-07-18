@@ -1,10 +1,10 @@
-set noai
-"filetype plugin indent off
+set noai "filetype plugin indent off
 set ts=4
 set sw=4
 match ErrorMsg /\s\+$\| \+\ze\t/
 set expandtab
-set nocompatible "关闭vi兼容
+set nocp "nocompatible关闭vi兼容
+set bs=2 "在insert模式下用退格键删除
 set enc=utf-8
 "set number "显示行号
 "filetype plugin on "文件类型
