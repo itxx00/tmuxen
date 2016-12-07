@@ -1,3 +1,4 @@
+set term=xterm
 set noai "filetype plugin indent off
 set ts=4
 set sw=4
@@ -16,9 +17,9 @@ set enc=utf-8
 set ruler "右下角显示光标状态行
 "set nohls "关闭匹配的高亮显示
 set incsearch "设置快速搜索
-set foldenable "开启代码折叠
+"set foldenable "开启代码折叠
 "set fdm=manual "手动折叠
-set foldmethod=syntax "自动语法折叠
+"set foldmethod=syntax "自动语法折叠
 set modeline "自动载入模式行
 "自动插入modeline
 func! AppendModeline()
