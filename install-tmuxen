@@ -9,7 +9,7 @@
 
 bin=$HOME/bin
 cwd=$(cd $(dirname $0) && pwd)
-
+[ -f /usr/bin/tmux ] || yum -y install tmux
 [ -d $bin ] || mkdir $bin
 
 echo "Installing tmuxen to $bin"
