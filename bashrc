@@ -13,3 +13,5 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 stty erase ^H
+export HISTCONTROL=ignoredups
+
