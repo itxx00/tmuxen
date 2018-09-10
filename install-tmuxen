@@ -7,18 +7,20 @@
 # modified : 2013 Jul 06
 #
 
-bin=$HOME/bin
+bin=/usr/local/bin
 cwd=$(cd $(dirname $0) && pwd)
 [ -f /usr/bin/tmux ] || yum -y install tmux
 [ -d $bin ] || mkdir $bin
 
 echo "Installing tmuxen to $bin"
-ln -sf $cwd/tmuxen $bin/tmuxen
-ln -sf $cwd/sysinfo $bin/sysinfo
+/bin/cp -f $cwd/tmuxen $bin/tmuxen
+/bin/cp -f $cwd/sysinfo $bin/sysinfo
 
-echo "Symlinking _tmux.conf to $HOME/.tmux.conf"
+echo "Updateing $HOME/.tmux.conf"
 [ -f $HOME/.tmux.conf ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bk-$(date '+%Y%m%d%H%M%S')
-ln -sf $cwd/_tmux.conf $HOME/.tmux.conf
-[ -f $HOME/.vimrc ] || ln -s $cwd/vimrc $HOME/.vimrc
+/bin/cp -f $cwd/_tmux.conf $HOME/.tmux.conf
+echo "Updateing $HOME/.vimrc and bashrc"
+[ -f $HOME/.vimrc ] || /bin/cp -f $cwd/vimrc $HOME/.vimrc
+grep -q 'vim' $HOME/.bashrc || echo "alias vi='vim'" >>$HOME/.bashrc
 
 exit
