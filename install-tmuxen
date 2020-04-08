@@ -9,7 +9,7 @@
 
 bin=/usr/local/bin
 cwd=$(cd $(dirname $0) && pwd)
-[ -f /usr/bin/tmux ] || yum -y install tmux
+[ -f /usr/bin/tmux ] || yum -y localinstall $cwd/pkgs/*.rpm
 [ -d $bin ] || mkdir $bin
 
 echo "Installing tmuxen to $bin"
