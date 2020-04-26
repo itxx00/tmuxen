@@ -8,7 +8,7 @@
 #
 
 cmd=$(which tmux)      # tmux path
-session=$(hostname -s) # session name
+session=well # session name
 
 if [[ -n $1 ]]; then
     session=$1
@@ -24,11 +24,11 @@ $cmd has -t $session
 if [ $? != 0 ]; then
     $cmd new -d -n bash1 -s $session "bash"
     #$cmd neww -n mutt -t $session "mutt"
-    $cmd neww -n irssi -t $session "irssi"
-    $cmd neww -n cmus -t $session "cmus"
-    $cmd neww -n bash -t $session "bash"
+    #$cmd neww -n irssi -t $session "irssi"
+    #$cmd neww -n cmus -t $session "cmus"
+    $cmd neww -n bash2 -t $session "bash"
     #$cmd splitw -h -p 50 -t $session "zsh"
-    $cmd selectw -t $session:4
+    $cmd selectw -t $session:1
 fi
 
 $cmd att -t $session
