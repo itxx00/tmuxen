@@ -13,5 +13,7 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 stty erase ^H
-export HISTCONTROL=ignoredups
-
+export HISTCONTROL=ignorespace:erasedups
+export PROMPT_COMMAND='history -a'
+export HISTIGNORE="ls:ps:history"
+export HISTTIMEFORMAT='[%F %T] '
