@@ -32,3 +32,5 @@ endfunc
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 "空格展开折叠
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+"colorscheme desert
+hi MatchParen ctermbg=Yellow guibg=lightblue
